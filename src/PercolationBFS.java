@@ -34,7 +34,7 @@ public class PercolationBFS extends PercolationDFSFast{
 					myGrid[rowT][colT] = FULL;
 					Integer sizeA = rowT * myGrid.length + colT; 
 					pq.add(sizeA); 
-					System.out.println(pq.size()); 
+					//System.out.println(pq.size()); 
 				}
 			}
 	
