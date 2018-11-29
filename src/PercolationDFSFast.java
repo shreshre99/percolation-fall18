@@ -6,6 +6,7 @@ public class PercolationDFSFast extends PercolationDFS{
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
 	public void updateOnOpen(int row , int col) { 
 		
 		if(row == 0) { 

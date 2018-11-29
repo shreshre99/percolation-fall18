@@ -7,6 +7,7 @@ public class PercolationBFS extends PercolationDFSFast{
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
 	protected void dfs(int row , int col) { 
         int[] rowDelta = {-1,1,0,0};
         int[] colDelta = {0,0,-1,1};
@@ -19,29 +20,25 @@ public class PercolationBFS extends PercolationDFSFast{
         Queue<Integer> pq = new LinkedList<>(); 
         
 		myGrid[row][col] = FULL;
-		int sizeT = row * myGrid.length + col;  
+		Integer sizeT = row * myGrid.length + col;  
 		
 		pq.add(sizeT); 
-		
 		while(pq.size() != 0) { 
 			
-			Integer i = pq.remove(); 
+			int i = pq.remove().intValue(); 
 			for(int k = 0; k < rowDelta.length; k++) { 
-				row = (i.intValue()/myGrid.length) + rowDelta[k]; 
-				col = (i.intValue()%myGrid.length) + colDelta[k]; 
-				if(inBounds(row,col) && isOpen(row, col) && myGrid[row][col] == BLOCKED) { 
-					myGrid[row][col] = FULL;
-					int sizeA = row * myGrid.length + col; 
-					pq.add(sizeA); 
+				int rowT = (i/myGrid.length) + rowDelta[k]; 
+				int colT = (i%myGrid.length) + colDelta[k]; 
+				if(inBounds(rowT,colT) && isOpen(rowT, colT) && myGrid[rowT][colT] != FULL) { 
 					
+					myGrid[rowT][colT] = FULL;
+					Integer sizeA = rowT * myGrid.length + colT; 
+					pq.add(sizeA); 
+					System.out.println(pq.size()); 
 				}
 			}
 	
 		}
-		
-        
-
-		
 		
 	}
 	
