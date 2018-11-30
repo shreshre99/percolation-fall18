@@ -57,22 +57,15 @@ public class PercolationUF implements IPercolate{
         			int tempP = rowT * myGrid.length + colT;
         			myFinder.union(tempO, tempP); 
         		}
-        		
-        		
+        			
         	}
-        	
-        	
+        		
         }
-		
-		
-		
-		
-		
 		
 	}
 
 	private boolean inBounds(int row, int col) {
-		if(row >= myGrid.length || col >= myGrid.length) { 
+		if(row >= myGrid.length || col >= myGrid.length || row < 0 || col < 0) { 
 			return false;
 		}
 		return true; 
