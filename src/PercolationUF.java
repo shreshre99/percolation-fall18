@@ -27,7 +27,7 @@ public class PercolationUF implements IPercolate{
 					String.format("(%d,%d) not in bounds", row,col));
 		}
 		
-		if(!isOpen(row, col) || isFull(row , col)) { 
+		if(!isOpen(row, col)) { 
 			return; 
 		}
 		
