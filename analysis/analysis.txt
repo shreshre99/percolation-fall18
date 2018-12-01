@@ -1,22 +1,109 @@
-Your name
-Your netid
-
-Copy/Paste results from PercolationStats using PercolationDFS
+Your name Shreyas Kulkarni
+Your netid srk37
 
 
 Copy/Paste results from PercolationStats using PercolationDFSFast
-
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.201
+200	0.591	0.010	0.173
+400	0.590	0.006	0.973
+800	0.594	0.004	6.797
+Exception in thread "main" java.lang.StackOverflowError
+	at PercolationDFS.dfs(PercolationDFS.java:109)
+	at PercolationDFS.dfs(PercolationDFS.java:109)
+	at PercolationDFS.dfs(PercolationDFS.java:109)
+	at PercolationDFS.dfs(PercolationDFS.java:109)
+	at PercolationDFS.dfs(PercolationDFS.java:109)
+	at PercolationDFS.dfs(PercolationDFS.java:109).......
 
 Copy/Paste results from PercolationStats using PercolationBFS
+simulation data for 20 trials
+grid	mean	stddev	time
+100		0.593	0.014	0.222
+200		0.591	0.010	0.270
+400		0.590	0.006	1.148
+800		0.594	0.004	6.942
+1600	0.592	0.002	37.943
+3200	0.593	0.001	279.075
 
 
 Copy/Paste results from PercolationStats using PercolationUF 
 with the QuickUWPC UnionFind implementation.
 
+simulation data for 20 trials
+grid	mean	stddev	time
+100		0.593	0.014	0.107
+200		0.591	0.010	0.131
+400		0.590	0.006	0.657
+800		0.594	0.004	4.444
+1600	0.592	0.002	19.653
+3200	0.593	0.001	138.815
+
+
+
 1. How does doubling the grid size affect running time (keeping # trials fixed)
+For PercolationDFSFast, the runtimes are generally longer and increase significantly as the grid size increases. 
+Something interest to not is that the calls passed the 800 size grid did not occur due to a stack overflow
+error. This is because at the grid size of 1600, the worst case number of recursive calls will be (1600*1600) calls
+for the number of possible cells. This is much greater than what the computer can take and therefore will crash. The 
+runtimes for the PercolationDFSFast appear to increase by 6 times when the size is doubled. For the PercolationBFS
+the runtimes appear to increase by 6-7 times after every increase in size throughout the entire test. For the 
+PercolationUF, the runtime increases by approximately 5-6 times for the increases until 1600size. For the transition
+between 1600-3200, the runtime increases by approximately 6-7times, similar to the increases from the previous classes.
+This makes sense due to the different implementations in the classes with the DFSFast relying on endless recursive 
+calls that will take really long to fully bottom out on. The BFS uses a Queue that will be able to handle the number 
+of calls to make cells open or full, therefore it will handle all the cases but take longer. The UF uses union find
+which is a simple one call to group sets together, therefore, it will take much less time to full carry out all the 
+tests.  
+
 
 
 2. How does doubling the number of trials affect running time.
+simulation data for 40 trials
+grid	mean	stddev	time
+100	0.594	0.015	0.217
+200	0.591	0.009	0.341
+400	0.591	0.005	1.759
+800	0.593	0.004	12.836
+Exception in thread "main" java.lang.StackOverflowError
+	at PercolationDFS.dfs(PercolationDFS.java:109)
+	at PercolationDFS.dfs(PercolationDFS.java:109)
+	at PercolationDFS.dfs(PercolationDFS.java:111)
+	at PercolationDFS.dfs(PercolationDFS.java:111)
+	
+simulation data for 40 trials
+grid	mean	stddev	time
+100	0.594	0.015	0.263
+200	0.591	0.009	0.400
+400	0.591	0.005	2.093
+800	0.593	0.004	13.307
+1600	0.593	0.002	79.887
+3200	0.593	0.001	593.15
+
+simulation data for 40 trials
+grid	mean	stddev	time
+100	0.594	0.015	0.130
+200	0.591	0.009	0.222
+400	0.591	0.005	1.766
+800	0.593	0.004	11.163
+1600	0.593	0.002	54.547
+3200	0.593	0.001	298.63
+
+When the trial size is doubled, the runtime itself is doubled also. This follows because the same logic 
+explained above for the each of the methods is applied, however the N itself is two times bigger, therefore
+the runtime that occurs itself should be 2 times bigger because the runtimes are respective to the size of
+N itself.
 
 
 3. Estimate the largest grid size you can run in 24 hours with 20 trials. Explain your reasoning.
+Since the UnionFind class runs the fastest, that would be the method used to maximize the grid size.
+Since it takes approximately 138.185 secs for 3200 grid, and there are 60sec*60min*24hr in day, that means
+there are 86400 seconds in the day. The grid should be kept doubling and the runtime would increase 
+by approximately by 7times so it would be
+6400	~2100sec
+12800	~14700sec
+The number of seconds in the day is approximately 6 times larger than the time for 12800n, therefore the 
+grid size is closer to the next double, leading to my estimate of a grid that is about 23000size that 
+will run in 24hrs with 20trials. 
+24600	~101900sec
